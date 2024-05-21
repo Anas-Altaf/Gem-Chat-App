@@ -37,23 +37,23 @@ class GeminiChatApp:
         self.root.bind('<KeyRelease-period>', self.period_release)
 
     def create_widgets(self):
-        self.log_text = scrolledtext.ScrolledText(self.root, width=60, height=20, state='disabled')
-        self.log_text.grid(column=0, row=0, padx=10, pady=10)
+        self.log_text = scrolledtext.ScrolledText(self.root, width=20, height=3, state='disabled')
+        self.log_text.grid(column=0, row=0, padx=1, pady=1)
 
-        self.process_button = tk.Button(self.root, text="Process Input (Ctrl+..)", command=self.process_input)
-        self.process_button.grid(column=0, row=1, padx=10, pady=10)
+        self.process_button = tk.Button(self.root, text="P(Ctrl+..)", command=self.process_input)
+        self.process_button.grid(column=0, row=1, padx=1, pady=1)
 
-        self.image_button = tk.Button(self.root, text="Select Image", command=self.select_image)
-        self.image_button.grid(column=0, row=2, padx=10, pady=10)
+        self.image_button = tk.Button(self.root, text="S", command=self.select_image)
+        self.image_button.grid(column=0, row=2, padx=1, pady=1)
 
-        self.unselect_button = tk.Button(self.root, text="Unselect Image", command=self.unselect_image)
-        self.unselect_button.grid(column=0, row=3, padx=10, pady=10)
+        self.unselect_button = tk.Button(self.root, text="Un", command=self.unselect_image)
+        self.unselect_button.grid(column=0, row=3, padx=1, pady=1)
 
         self.image_label = tk.Label(self.root)
-        self.image_label.grid(column=0, row=4, padx=10, pady=10)
+        self.image_label.grid(column=0, row=4, padx=1, pady=1)
 
-        self.chat_toggle = tk.Checkbutton(self.root, text="Chat Mode", variable=self.chat_mode)
-        self.chat_toggle.grid(column=0, row=5, padx=10, pady=10)
+        self.chat_toggle = tk.Checkbutton(self.root, text="C", variable=self.chat_mode)
+        self.chat_toggle.grid(column=0, row=5, padx=1, pady=1)
 
     def log_message(self, message):
         if self.log_text:
@@ -95,7 +95,7 @@ class GeminiChatApp:
         self.image_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
         if self.image_path:
             img = Image.open(self.image_path)
-            img.thumbnail((200, 200))
+            img.thumbnail((10, 10))
             img = ImageTk.PhotoImage(img)
             self.image_label.configure(image=img)
             self.image_label.image = img

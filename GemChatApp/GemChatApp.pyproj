@@ -24,6 +24,7 @@
     <Compile Include="GemChatApp.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="history.txt" />
     <Content Include="input.txt" />
     <Content Include="output.txt" />
   </ItemGroup>

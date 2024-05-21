@@ -82,6 +82,15 @@ class GeminiChatApp:
         except Exception as e:
             self.log_message(f"Error writing output file: {e}")
 
+    def append_to_history_file(self, output_text):
+        try:
+            with open('history.txt', 'a') as file:
+                file.write(output_text + "\n")
+                file.write("." * 50 + "\n")  # Append a dotted line
+            self.log_message("Output appended to history file.")
+        except Exception as e:
+            self.log_message(f"Error appending to history file: {e}")
+
     def select_image(self):
         self.image_path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png;*.jpg;*.jpeg")])
         if self.image_path:
@@ -134,6 +143,7 @@ class GeminiChatApp:
         response_text = self.call_gemini_api(input_text)
         if response_text:
             self.write_output_file(response_text)
+            self.append_to_history_file(response_text)
             self.log_message("Processing completed.")
         else:
             self.log_message("No response received.")

@@ -24,7 +24,7 @@ class GeminiChatApp:
 
         if not self.api_key:
             self.log_message("No API key found in .env file. Using hardcoded API key.")
-            self.api_key = "AIzaSyAkLOszA0v9j1Vjb9BdqheqkWLxqjWb0_w"
+            self.api_key = "Hard-Coded-Api"
 
         if self.api_key:
             genai.configure(api_key=self.api_key)

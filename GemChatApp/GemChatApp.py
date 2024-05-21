@@ -10,14 +10,6 @@ class GeminiChatApp:
         self.root = root
         self.root.title("GGT")
 
-        # Load API key from .env file
-        load_dotenv()
-        self.api_key = os.getenv('API_KEY')
-        if not self.api_key:
-            self.api_key = "YOUR_HARDCODED_API_KEY"
-
-        genai.configure(api_key=self.api_key)
-
         self.context = []
         self.ctrl_pressed = False
         self.period_pressed = 0
@@ -25,6 +17,20 @@ class GeminiChatApp:
         self.chat_mode = tk.BooleanVar(value=True)  # Chat mode flag
 
         self.create_widgets()
+
+        # Load API key from .env file
+        load_dotenv()
+        self.api_key = os.getenv('API_KEY')
+
+        if not self.api_key:
+            self.log_message("No API key found in .env file. Using hardcoded API key.")
+            self.api_key = "AIzaSyAkLOszA0v9j1Vjb9BdqheqkWLxqjWb0_w"
+
+        if self.api_key:
+            genai.configure(api_key=self.api_key)
+        else:
+            self.log_message("No API key available. The application may not function properly.")
+
         self.root.bind('<Control_L>', self.control_press)
         self.root.bind('<KeyRelease-Control_L>', self.control_release)
         self.root.bind('<period>', self.period_press)
@@ -50,10 +56,13 @@ class GeminiChatApp:
         self.chat_toggle.grid(column=0, row=5, padx=10, pady=10)
 
     def log_message(self, message):
-        self.log_text.configure(state='normal')
-        self.log_text.insert(tk.END, message + "\n")
-        self.log_text.configure(state='disabled')
-        self.log_text.yview(tk.END)
+        if self.log_text:
+            self.log_text.configure(state='normal')
+            self.log_text.insert(tk.END, message + "\n")
+            self.log_text.configure(state='disabled')
+            self.log_text.yview(tk.END)
+        else:
+            print(message)
 
     def read_input_file(self):
         try:

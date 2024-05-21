@@ -24,7 +24,6 @@
     <Compile Include="GemChatApp.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".env" />
     <Content Include="input.txt" />
     <Content Include="output.txt" />
   </ItemGroup>

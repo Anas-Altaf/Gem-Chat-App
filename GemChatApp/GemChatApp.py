@@ -40,11 +40,14 @@ class GeminiChatApp:
         self.image_button = tk.Button(self.root, text="Select Image", command=self.select_image)
         self.image_button.grid(column=0, row=2, padx=10, pady=10)
 
+        self.unselect_button = tk.Button(self.root, text="Unselect Image", command=self.unselect_image)
+        self.unselect_button.grid(column=0, row=3, padx=10, pady=10)
+
         self.image_label = tk.Label(self.root)
-        self.image_label.grid(column=0, row=3, padx=10, pady=10)
+        self.image_label.grid(column=0, row=4, padx=10, pady=10)
 
         self.chat_toggle = tk.Checkbutton(self.root, text="Chat Mode", variable=self.chat_mode)
-        self.chat_toggle.grid(column=0, row=4, padx=10, pady=10)
+        self.chat_toggle.grid(column=0, row=5, padx=10, pady=10)
 
     def log_message(self, message):
         self.log_text.configure(state='normal')
@@ -79,6 +82,12 @@ class GeminiChatApp:
             self.image_label.configure(image=img)
             self.image_label.image = img
             self.log_message(f"Image selected: {self.image_path}")
+
+    def unselect_image(self):
+        self.image_path = None
+        self.image_label.configure(image='')
+        self.image_label.image = None
+        self.log_message("Image unselected.")
 
     def call_gemini_api(self, input_text):
         try:
@@ -140,4 +149,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = GeminiChatApp(root)
     root.mainloop()
-
